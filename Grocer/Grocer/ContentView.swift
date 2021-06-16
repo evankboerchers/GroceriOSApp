@@ -12,21 +12,71 @@ struct ContentView: View {
     
     @ObservedObject var gListStore = GListStore()
     
-    @State private var showingModal = false
+    @State private var showingNewModal = false
     
     @State var newListName : String  = ""
     
-    func addNewList() {
-        gListStore.lists.append(GList(id: String(gListStore.lists.count + 1), name: newListName))
-        showingModal = false
+    init() {
+        populateData(gListStore: gListStore)
+        Theme.navigationBarColors()
     }
     
-    var modal: some View {
+    func addNewList() {
+        gListStore.lists.append(GList(name: newListName))
+        showingNewModal = false
+    }
+    
+    func moveList(from source: IndexSet, to destination: Int) {
+        gListStore.lists.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func deleteList(at offsets: IndexSet) {
+        gListStore.lists.remove(atOffsets: offsets)
+    }
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                Color.red.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                List {
+                    ForEach(self.gListStore.lists) {
+                        list in
+                        NavigationLink(destination: ListView(gList: list)){
+                            VStack{
+                                Text(list.name)
+                            }
+                            VStack {
+                                Text(list.date).fontWeight(.light)
+                                    .foregroundColor(Color(Theme.textSecondary))
+                            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                        }
+                    }.onMove(perform: self.moveList)
+                    .onDelete(perform: self.deleteList)
+                  
+                }.listStyle(GroupedListStyle())
+                if $showingNewModal.wrappedValue {
+                    newModal
+                }
+            }
+            .navigationBarTitle("My Lists")
+            .navigationBarItems(trailing: HStack {
+                Button(action: {
+                    self.showingNewModal = true
+                }) {
+                    Text("New").foregroundColor(Color(Theme.toolbarButton))
+                }
+                EditButton().foregroundColor(Color(Theme.toolbarButton))
+            })
+        }
+    }
+    
+    var newModal: some View {
         ZStack {
             Color.black.opacity(0.4)
-                .edgesIgnoringSafeArea(.vertical)
+                .edgesIgnoringSafeArea(.all)
             VStack {
                 Text("New List").padding()
+                    .font(.title2)
                 TextField("Enter List Name", text: self.$newListName).padding()
                 HStack{
                     Button(action: self.addNewList
@@ -34,7 +84,7 @@ struct ContentView: View {
                         Text("Create")
                     }.padding()
                     Button(action: {
-                        self.showingModal = false
+                        self.showingNewModal = false
                     }) {
                         Text("Close")
                     }.padding()
@@ -46,33 +96,8 @@ struct ContentView: View {
         }
         
     }
-    
-    var body: some View {
-        
-        NavigationView {
-            ZStack {
-                VStack {
-                    List(self.gListStore.lists) { list in Text(list.name)
-                    }
-                }
-                if $showingModal.wrappedValue {
-                    modal
-                }
-                
-            }
-            .navigationBarTitle("My Lists")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        self.showingModal = true
-                    }) {
-                        Text("New")
-                    }
-                }
-            }
-        }
-    }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

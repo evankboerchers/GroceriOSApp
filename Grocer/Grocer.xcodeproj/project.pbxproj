@@ -12,6 +12,9 @@
 		0FB8A8782672DD1600D725FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FB8A8772672DD1600D725FC /* Assets.xcassets */; };
 		0FB8A87B2672DD1600D725FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FB8A87A2672DD1600D725FC /* Preview Assets.xcassets */; };
 		FE66FBA026757B1700F9A4A1 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE66FB9F26757B1700F9A4A1 /* DataSource.swift */; };
+		FE88ABC92678004000E9DA49 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE88ABC82678004000E9DA49 /* ListView.swift */; };
+		FE88ABCB26781D0F00E9DA49 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE88ABCA26781D0F00E9DA49 /* ItemView.swift */; };
+		FECCE0F12679203D00B37A45 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECCE0F02679203D00B37A45 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		0FB8A87A2672DD1600D725FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0FB8A87C2672DD1600D725FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE66FB9F26757B1700F9A4A1 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		FE88ABC82678004000E9DA49 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		FE88ABCA26781D0F00E9DA49 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		FECCE0F02679203D00B37A45 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +62,11 @@
 			children = (
 				0FB8A8732672DD1200D725FC /* GrocerApp.swift */,
 				0FB8A8752672DD1200D725FC /* ContentView.swift */,
+				FECCE0F02679203D00B37A45 /* Theme.swift */,
+				FE88ABC82678004000E9DA49 /* ListView.swift */,
 				FE66FB9F26757B1700F9A4A1 /* DataSource.swift */,
 				0FB8A8772672DD1600D725FC /* Assets.xcassets */,
+				FE88ABCA26781D0F00E9DA49 /* ItemView.swift */,
 				0FB8A87C2672DD1600D725FC /* Info.plist */,
 				0FB8A8792672DD1600D725FC /* Preview Content */,
 			);
@@ -141,8 +150,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE88ABC92678004000E9DA49 /* ListView.swift in Sources */,
 				FE66FBA026757B1700F9A4A1 /* DataSource.swift in Sources */,
 				0FB8A8762672DD1200D725FC /* ContentView.swift in Sources */,
+				FECCE0F12679203D00B37A45 /* Theme.swift in Sources */,
+				FE88ABCB26781D0F00E9DA49 /* ItemView.swift in Sources */,
 				0FB8A8742672DD1200D725FC /* GrocerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
