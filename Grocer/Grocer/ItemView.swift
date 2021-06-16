@@ -7,11 +7,19 @@
 
 import SwiftUI
 
-
+/**
+ View that manages item details
+ */
 struct ItemView: View {
     
-    @State var item: Item
+    /**
+     Item reference
+     */
+    @Binding var item: Item
     
+    /**
+    View body that shows item details
+     */
     var body: some View {
         HStack(alignment: .top){
             VStack(alignment: .leading) {
@@ -40,12 +48,4 @@ struct ItemView: View {
     }
 }
 
-struct ItemView_Previews: PreviewProvider {
 
-    static var previews: some View {
-        NavigationView{
-            ItemView(item: Item.example)
-        }
-        
-    }
-}

@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+/**
+ Theme Class for setting navigation bar colors and provides library of used colors.
+ */
 final class Theme {
     
     static let mainColor = UIColor(hue: 0.9972, saturation: 0.61, brightness: 0.93, alpha: 1.0)

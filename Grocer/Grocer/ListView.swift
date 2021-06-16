@@ -8,35 +8,52 @@
 import SwiftUI
 import Combine
 
-
+/**
+ View that manages a specific lists items
+ */
 struct ListView: View {
     
-    @State var gList: GList
+    /**
+     The list reference
+     */
+    @Binding var gList: GList
     
+    /**
+     Moves list item index
+     */
     func moveItem(from source: IndexSet, to destination: Int) {
-        gList.items.move(fromOffsets: source, toOffset: destination)
+        self.gList.items.move(fromOffsets: source, toOffset: destination)
     }
     
+    /**
+     Removes list item from list
+     */
     func deleteItem(at offsets: IndexSet) {
-        gList.items.remove(atOffsets: offsets)
+        self.gList.items.remove(atOffsets: offsets)
     }
     
+    /**
+     Adds generic item to list
+     */
     func addItem() {
-        gList.items.append(Item(name: "New Item", quantity: "", notes: ""))
+        self.gList.items.append(Item(name: "New Item", quantity: "", notes: ""))
     }
     
+    /**
+     View body showing list items and navbar tools
+     */
     var body: some View {
         VStack {
             List {
-                ForEach(self.gList.items) {
-                    item in
-                    NavigationLink(destination: ItemView(item: item)){
+                ForEach(self.gList.items.indices, id: \.self) {
+                    index in
+                    NavigationLink(destination: ItemView(item: self.$gList.items[index])){
                         HStack{
                             VStack{
-                                Text(item.name)
+                                Text(self.gList.items[index].name)
                             }
                             VStack {
-                                Text(item.quantity).fontWeight(.light)
+                                Text(self.gList.items[index].quantity).fontWeight(.light)
                                     .foregroundColor(Color(Theme.textSecondary))
                             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                         }
@@ -44,7 +61,7 @@ struct ListView: View {
                 }.onMove(perform: self.moveItem)
                 .onDelete(perform: self.deleteItem)
             }
-        }.navigationTitle(gList.name)
+        }.navigationTitle(self.gList.name)
         .navigationBarItems(trailing: HStack {
             Button(action: self.addItem
             ) {
@@ -55,13 +72,3 @@ struct ListView: View {
     }
 }
 
-struct ListView_Previews: PreviewProvider {
-    
-    static var example = GList(name: "Safeway List")
-    
-    static var previews: some View {
-        NavigationView {
-            ListView(gList: example)
-        }
-    }
-}

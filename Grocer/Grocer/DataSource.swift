@@ -8,25 +8,41 @@
 import Foundation
 import Combine
 
+/**
+ TODO: Implement JSON encoder/decoder to save and load from JSON file(s)
+ */
+
+/**
+ Formats date object to string
+ */
 func formatDate(date: Date) -> String {
     let df = DateFormatter()
     df.dateFormat = "MMMM-d y"
     return df.string(from: date)
 }
 
+/**
+ Grocery list struct
+ */
 struct GList: Identifiable {
     var id = UUID()
     var name: String
     var date = formatDate(date: Date())
     var items = [Item]()
-    
+
     static var example = GList(name: "Safeway List")
 }
 
+/**
+ Main grocery list store object
+ */
 class GListStore : ObservableObject {
     @Published var lists = [GList]()
 }
 
+/**
+ Grocery Item struct
+ */
 struct Item : Identifiable {
     var id = UUID()
     var name: String
@@ -36,6 +52,9 @@ struct Item : Identifiable {
     static var example = Item(name: "Apples", quantity: "20", notes: "")
 }
 
+/**
+ Populates Grocery List store for demonstration purposes
+ */
 func populateData(gListStore: GListStore) {
     
     var list1 = GList(name: "Safeway")
